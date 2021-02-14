@@ -10,4 +10,11 @@ $(document).ready(function () {
     console.log(listCheck);
     $(this).parents('.amenities').find('h4').text(listCheck);
   });
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, textStatus) {
+    if (textStatus === 200) {
+      $('#api_status').addClass('available');
+    } else {
+      $('#api_status').removeClass('available');
+    }
+  });
 });
