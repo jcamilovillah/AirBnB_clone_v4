@@ -5,7 +5,7 @@ $(document).ready(function () {
   $('input:checkbox').on('click', function () {
     listCheck = [];
     $('input:checked').each(function () {
-      listCheck.push($(this).attr('data-name'));
+      listCheck.push(' ' + $(this).attr('data-name'));
     });
     console.log(listCheck);
     $(this).parents('.amenities').find('h4').text(listCheck);
