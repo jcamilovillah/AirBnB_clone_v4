@@ -7,17 +7,17 @@ $(document).ready(function () {
     $('input:checked').each(function () {
       // listCheck.push(' ' + $(this).attr('data-name'));
       listCheck.push(
-          {
-            id: $(this).attr('data-id'), 
-            name: $(this).attr('data-name')
-          }
-        )
+        {
+          id: $(this).attr('data-id'),
+          name: $(this).attr('data-name')
+        }
+      );
     });
     $(this).parents('.amenities').find('h4').text(
-        listCheck.map(function(amenity){ 
-          return ' ' + amenity.name;
-        })
-      );
+      listCheck.map(function (amenity) {
+        return ' ' + amenity.name;
+      })
+    );
   });
   // localhost instead of 0.0.0.0 to work on windows
   $.getJSON('http://localhost:5001/api/v1/status/', function (data) {
@@ -27,9 +27,8 @@ $(document).ready(function () {
       $('#api_status').removeClass('available');
     }
   });
-  
-  
-  let queryPlaces = function(searchParam) {
+
+  const queryPlaces = function (searchParam) {
     $.ajax({
       type: 'POST',
       // localhost instead of 0.0.0.0 to work on windows
@@ -38,8 +37,8 @@ $(document).ready(function () {
       dataType: 'json',
       contentType: 'application/json',
       success: (data) => {
-        $('SECTION.places').empty()
-        // console.log(data.length); check the amout of data that is being filtered 
+        $('SECTION.places').empty();
+        // console.log(data.length); check the amout of data that is being filtered
         for (const place of data) {
           const template = `<article>
                                  <div class="title_box">
@@ -57,16 +56,16 @@ $(document).ready(function () {
         }
       }
     });
-  }
+  };
   queryPlaces('{}');
-  
+
   $('button').click(
-    function(){
-      const filter = {amenities: []};
+    function () {
+      const filter = { amenities: [] };
 
       filter.amenities = listCheck.map(
-        function(amenity){
-          return amenity.id
+        function (amenity) {
+          return amenity.id;
         });
       queryPlaces(JSON.stringify(filter));
     }
